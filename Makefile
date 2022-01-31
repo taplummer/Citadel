@@ -14,7 +14,7 @@ displayhelp:
 
 runlocal:
 	@echo Run without docker. This will download necessary tools to your host machine. 
-	./citadel
+	./citadel $(target)
 
 run:
 	docker build -t citadel .
