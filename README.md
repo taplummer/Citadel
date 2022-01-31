@@ -10,6 +10,7 @@ You can also run this in Docker, and this will prevent you from downloading util
 
 # Executing on Host
 Download the binary, ensure it's executable (chmod +x), and run it with "sudo ./citadel <IP or website>" 
+
 You can also clone this repo (git clone), cd into it, and type "sudo make runlocal target=<IP or website>"
 
 # Executing in Docker
