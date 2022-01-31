@@ -23,6 +23,8 @@ git clone https://github.com/taplummer/Citadel
 
 cd /Citadel
 
+chmod +x citadel
+
 sudo make runlocal target=IP
 
 # Executing Within Docker
@@ -30,9 +32,9 @@ Download Docker (sudo apt install docker.io)
 
 Make sure Docker is running (systemctl status docker)
 
-Clone this repo
+git clone https://github.com/taplummer/Citadel
 
-Cd into it 
+cd /Citadel
 
 chmod +x citadel
 
