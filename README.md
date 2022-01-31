@@ -18,4 +18,10 @@ Download Docker (sudo apt install docker.io)
 
 Make sure Docker is running (systemctl status docker)
 
-Clone this repo, cd into it, and type "make target=IP" 
+Clone this repo
+
+Cd into it 
+
+chmod +x citadel
+
+make target=IP
