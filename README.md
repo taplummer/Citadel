@@ -9,6 +9,7 @@ If you run the binary within your host, it will automatically verify that utilit
 You can also run this in Docker, and this will prevent you from downloading utilities onto your host machine. It will run within the container and spit out the results to your host. 
 
 # Executing on Host
+***Note, this method will automatically check/install utilities to your host***
 ## Binary Alone
 Download the citadel file
 
@@ -16,7 +17,6 @@ chmod +x citadel
 
 sudo ./citadel IP
 
-***Note, this method will automatically check/install utilities to your host***
 ## Git Clone
 
 git clone https://github.com/taplummer/Citadel
