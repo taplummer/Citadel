@@ -15,5 +15,7 @@ You can also clone this repo (git clone), cd into it, and type "sudo make runloc
 
 # Executing in Docker
 Download Docker (sudo apt install docker.io) 
+
 Make sure Docker is running (systemctl status docker)
+
 Clone this repo, cd into it, and type "make target=IP" 
