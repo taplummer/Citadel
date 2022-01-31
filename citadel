@@ -1,0 +1,100 @@
+#!/bin/bash 
+
+domain=$1
+RED="\033[1;31m"
+RESET="\033[0m"
+
+echo
+echo
+
+echo '_________  .__   __               .___       .__     _________                         
+\_   ___ \ |__|_/  |_ _____     __| _/ ____  |  |   /   _____/  ____  _____     ____   
+/    \  \/ |  |\   __\\__  \   / __ |_/ __ \ |  |   \_____  \ _/ ___\ \__  \   /    \  
+\     \____|  | |  |   / __ \_/ /_/ |\  ___/ |  |__ /        \\  \___  / __ \_|   |  \ 
+ \______  /|__| |__|  (____  /\____ | \___  >|____//_______  / \___  >(____  /|___|  / 
+        \/                 \/      \/     \/               \/      \/      \/      \/  
+                                                                                       '
+
+
+info_path=$domain/info
+directory_path=$domain/directories
+screenshot_path=$domain/screenshots
+	
+if [ ! -d "$domain" ];then 
+	mkdir $domain 
+fi
+
+if [ ! -d "$info_path" ];then
+	mkdir $info_path
+fi
+
+echo
+echo
+echo
+
+if [ ! -e /usr/bin/rustscan ];then
+
+	wget https://github.com/RustScan/RustScan/releases/download/2.0.1/rustscan_2.0.1_amd64.deb && sudo dpkg -i rustscan_2.0.1_amd64.deb
+
+fi 
+
+rm -rf ~/*/rustscan_2.0.1_amd64.deb
+
+echo -e "${RED} [+] Launching Rustscan ...${RESET}"
+rustscan -a $domain -u 2500 | tee $info_path/rustscan
+
+echo
+
+if [ ! -e /usr/bin/whatweb ];then
+
+        apt install whatweb -y
+fi
+
+
+echo -e "${RED} [+] Launching Whatweb scan ...{$RESET}"
+whatweb -v http://$domain | tee $info_path/whatweb
+
+echo
+
+if [ ! -e /usr/bin/nikto ];then
+
+        apt install nikto -y
+fi
+
+echo -e "${RED} [+] Checking for Web Vulnerabilities...${RESET}"
+nikto -host "http://$domain" | tee "$info_path/nikto"
+
+echo
+
+if [ ! -e /usr/bin/gobuster ];then
+
+        apt install gobuster -y
+fi
+
+echo 
+
+if [ ! -e /usr/share/wordlists/dirb/common.txt ];then
+
+	mkdir /usr/share/wordlists/ && mkdir /usr/share/wordlists/dirb && wget https://raw.githubusercontent.com/v0re/dirb/master/wordlists/common.txt && mv common.txt /usr/share/wordlists/dirb/
+
+fi 
+
+echo 
+
+echo -e "${RED} [+] Enumerating directories...${RESET}"
+gobuster dir -u http://$domain -w /usr/share/wordlists/dirb/common.txt --no-error 2>/dev/null | tee -a "$info_path/gobuster" 
+ 
+echo
+
+gobuster -u http://$domain -w /usr/share/wordlists/dirb/common.txt 2>/dev/null >> $info_path/gobuster
+
+echo
+
+echo -e "${RED} Enumeration Results saved in '$domain/info/gobuster' ...${RESET}"
+
+echo
+
+echo -e "${RED} Launching Full Nmap Scan ...${RESET}"
+nmap -T4 -p- -A -Pn $domain | tee $info_path/nmap
+
+exit
