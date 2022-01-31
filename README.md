@@ -14,4 +14,6 @@ Download the binary, ensure it's executable (chmod +x), and run it with "sudo ./
 You can also clone this repo (git clone), cd into it, and type "sudo make runlocal target=IP"
 
 # Executing in Docker
+Download Docker (sudo apt install docker.io) 
+Make sure Docker is running (systemctl status docker)
 Clone this repo, cd into it, and type "make target=IP" 
