@@ -9,11 +9,23 @@ If you run the binary within your host, it will automatically verify that utilit
 You can also run this in Docker, and this will prevent you from downloading utilities onto your host machine. It will run within the container and spit out the results to your host. 
 
 # Executing on Host
-Download the binary, ensure it's executable (chmod +x), and run it with "sudo ./citadel IP" 
+## Binary Alone
+Download the citadel file
 
-You can also clone this repo (git clone), cd into it, and type "sudo make runlocal target=IP"
+chmod +x citadel
 
-# Executing in Docker
+sudo ./citadel IP
+
+***Note, this method will automatically check/install utilities to your host***
+## Git Clone
+
+git clone https://github.com/taplummer/Citadel
+
+cd /Citadel
+
+sudo make runlocal target=IP
+
+# Executing Within Docker
 Download Docker (sudo apt install docker.io) 
 
 Make sure Docker is running (systemctl status docker)
