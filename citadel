@@ -45,6 +45,42 @@ rustscan -a $domain -u 2500 | tee $info_path/rustscan
 
 echo
 
+if [ ! -e /usr/bin/cat ];then
+	apt install cat -y
+fi
+
+if [ ! -e /usr/bin/grep ];then
+       apt install grep -y
+fi
+
+if [ ! -e /usr/bin/awk ];then
+	apt install awk -y
+fi
+
+if [ ! -e /usr/bin/tr ];then
+	apt install tr -y
+fi
+
+if [ ! -e /usr/bin/sed ];then
+	apt install sed -y
+fi
+
+if [ ! -e /usr/bin/rev ];then
+	apt install rev -y
+fi
+
+if [ ! -e /usr/bin/cut ];then
+	apt install cut -y
+fi
+
+echo
+
+cat $info_path/rustscan | grep "/tcp" | grep -v "Discovered" | awk '{$2=$3=$4=$5=$6=""; print $0}' | tr -d {=/tcp=} | tr -d "\n" | tr -s " " | sed 's/\>/,/g;s/,$//' | tr -d " " | grep -v ",%"| rev | cut --complement -c 1 | rev | tee tcpports
+
+ports=$(cat tcpports)
+
+echo
+
 if [ ! -e /usr/bin/whatweb ];then
 
         apt install whatweb -y
@@ -95,6 +131,33 @@ echo -e "${RED} Enumeration Results saved in '$domain/info/gobuster' ...${RESET}
 echo
 
 echo -e "${RED} Launching Full Nmap Scan ...${RESET}"
-nmap -T4 -p- -A -Pn $domain | tee $info_path/nmap
+nmap -T4 -A -p $ports $domain | tee $info_path/nmap
+
+rm -rf tcpports
+
+echo
+
+if [ ! -e usr/bin/git ];then
+	apt install git -y
+fi
+
+echo
+
+echo -e "${RED} Searching ExploitDB for possible exploits ...${RESET}"
+
+git clone https://github.com/offensive-security/exploitdb.git  
+
+cat $info_path/nmap | grep "/tcp" | awk '{$1=$2=$3=""; print $0}' > SVlist
+
+filename=SVlist
+while read line; do
+bash ./exploitdb/searchsploit $line 2>/dev/null | grep -v Exploits: | grep -v Shellcodes: >> $info_path/ExploitSuggestions
+done < $filename
+
+rm -rf ./exploitdb/
+
+rm -rf ./SVlist
+
+echo -e "${RED} ExploitDB results have been saved in $info_path/ExploitSuggestions ...${RESET}"
 
 exit
