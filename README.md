@@ -15,29 +15,29 @@ You can also run this in Docker, and this will prevent you from downloading util
 ## Binary Alone
 Download the citadel file
 
-chmod +x citadel
+```chmod +x citadel```
 
-sudo ./citadel IP
+```sudo ./citadel IP```
 
 ## Git Clone
 
-git clone https://github.com/taplummer/Citadel
+```git clone https://github.com/taplummer/Citadel```
 
-cd /Citadel
+```cd /Citadel```
 
-chmod +x citadel
+```chmod +x citadel```
 
-sudo make runlocal target=IP
+```sudo make runlocal target=IP```
 
 # Executing Within Docker
 Download Docker (sudo apt install docker.io) 
 
-Make sure Docker is running (systemctl status docker)
+Make sure Docker is running (```systemctl status docker```)
 
-git clone https://github.com/taplummer/Citadel
+```git clone https://github.com/taplummer/Citadel```
 
-cd /Citadel
+```cd /Citadel```
 
-chmod +x citadel
+```chmod +x citadel```
 
-make target=IP
+```make target=IP```
