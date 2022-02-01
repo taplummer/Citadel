@@ -10,6 +10,8 @@ If you run the binary within your host, it will automatically verify that utilit
 
 You can also run this in Docker, and this will prevent you from downloading utilities onto your host machine. It will run within the container and spit out the results to your host. 
 
+Changes FEB 1, 2022: I've added a few lines that will ```grep``` the Rustscan results for the port numbers and plug that directly into your ```nmap``` scan to shorten the scan time. Additionally, Citadel will search for possible exploits on ExploitDB based on the ```nmap``` results and save them to "info" directory.  
+
 # Executing on Host
 ***Note, this method will automatically check/install utilities to your host***
 ## Binary Alone
