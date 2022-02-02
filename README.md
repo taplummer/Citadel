@@ -32,7 +32,7 @@ Download the citadel file
 ```sudo make runlocal target=IP```
 
 # Executing Within Docker
-Download Docker (sudo apt install docker.io) 
+Download Docker (```sudo apt install docker.io```) 
 
 Make sure Docker is running (```systemctl status docker```)
 
