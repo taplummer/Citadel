@@ -43,3 +43,9 @@ Make sure Docker is running (```systemctl status docker```)
 ```chmod +x citadel```
 
 ```make target=IP```
+
+***On some distros, the "make" command above may not work. If it throws an error (other than telling you to run with ```sudo```, use the command below***
+
+```docker run -v $(pwd):/host -it citadel:latest /host/citadel <IP address>```
+
+Again, depending on docker's permissions, you may need to run this with ```sudo```.
