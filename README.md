@@ -17,8 +17,6 @@ Changes FEB 1, 2022: I've added a few lines that will ```grep``` the Rustscan re
 ## Binary Alone
 Download the citadel file
 
-```chmod +x citadel```
-
 ```sudo ./citadel IP```
 
 ## Git Clone
@@ -26,8 +24,6 @@ Download the citadel file
 ```git clone https://github.com/taplummer/Citadel```
 
 ```cd /Citadel```
-
-```chmod +x citadel```
 
 ```sudo make runlocal target=IP```
 
@@ -39,8 +35,6 @@ Make sure Docker is running (```systemctl status docker```)
 ```git clone https://github.com/taplummer/Citadel```
 
 ```cd /Citadel```
-
-```chmod +x citadel```
 
 ```make target=IP```
 
