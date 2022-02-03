@@ -14,18 +14,12 @@ Changes FEB 1, 2022: I've added a few lines that will ```grep``` the Rustscan re
 
 # Executing on Host
 ***Note, this method will automatically check/install utilities to your host***
-## Binary Alone
-Download the citadel file
-
-```sudo ./citadel IP```
-
-## Git Clone
 
 ```git clone https://github.com/taplummer/Citadel```
 
 ```cd /Citadel```
 
-```sudo make runlocal target=IP```
+```./citadel```
 
 # Executing Within Docker
 Download Docker (```sudo apt install docker.io```) 
