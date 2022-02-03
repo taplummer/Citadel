@@ -49,3 +49,17 @@ Make sure Docker is running (```systemctl status docker```)
 ```docker run -v $(pwd):/host -it citadel:latest /host/citadel <IP address>```
 
 Again, depending on docker's permissions, you may need to run this with ```sudo```.
+
+# For VirtualBox / Vagrant Usage
+
+Note: You'll need the following tooling on your computer:
+1. Get Vagrant installed through your normal means.
+2. Have VirtualBox installed through your normal means.
+3. Have Ansible installed through your normal means.
+
+## Running
+Note: change directory into the "vagrant" subdirectory.
+1. `vagrant up`
+2. Reboot the VM after provisioning, as the docker
+3. Login with vagrant / vagrant.
+4. Once in the guest VM, open a terminal, cd to `/home/vagrant/source/citadel`, and execute `make run target=127.0.0.1` (if you were targeting localhost).

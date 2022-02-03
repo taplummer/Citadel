@@ -1,0 +1,43 @@
+---
+- hosts: all
+
+  tasks: 
+
+  - name: Download citadel
+    become: yes
+    git:
+      repo: 'https://github.com/taplummer/citadel.git'
+      dest: /home/vagrant/source/citadel
+
+  - name: Changing perm of "/source/citadel", adding "+x"
+    become: yes
+    file: dest=/home/vagrant/source/citadel/citadel mode=a+x
+
+  - name: Add Docker GPG apt Key
+    become: yes
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker Repository
+    become: yes
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu bionic stable
+      state: present
+
+  - name: Update apt and install docker-ce docker-python
+    become: yes
+    apt: 
+      update_cache: yes 
+      name: 
+        - docker-ce 
+        - python3-docker
+      state: latest
+
+  - name: Adding user vagrant to docker group
+    become: yes
+    user:
+      name: "vagrant"
+      groups: "docker"
+      append: "yes"
+
